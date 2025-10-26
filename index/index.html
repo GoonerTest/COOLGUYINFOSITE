@@ -84,7 +84,7 @@
 <!-- Animated Browser Title -->
 <script>
   const titleSequence = [
-    "C","CO","COO","COOL","COOL.","COOL.I","COOL.IN","COOL.INF","COOL.INFO"
+    "C","CO","COO","COOL","COOL.","COOL.I","COOL.IN","COOL.INF",
     "COOL.INF","COOL.IN","COOL.I","COOL.","COOL","COO","CO","C"
   ];
   let titleIndex = 0;
@@ -112,7 +112,7 @@
     <img class="profile" src="https://github.com/GoonerTest/itwasnetme/blob/main/a_474e1c4bb9e57d286463e25cd371423a.gif?raw=true" alt="Profile">
     <h1>COOLGUY</h1>
     <div class="buttons">
-      <!-- TikTok -->
+      <!-- Discord -->
       <a href="https://discord.gg/anotheraxiom" target="_blank">
         <img src="https://www.clipartmax.com/png/full/39-393163_company-discord-logo-png-white.png" alt="discord.gg/anotheraxiom">
       </a>
@@ -137,7 +137,7 @@
       <span id="currentTime">0:00</span>
       <span id="duration">0:00</span>
     </div>
-    <audio id="audio" src="https://github.com/GoonerTest/itwasnetme/raw/refs/heads/main/08ca8e3bfc9571c82d68673d33a1b291.mp3"></audio>
+    <audio id="audio" src="https://github.com/GoonerTest/itwasnetme/raw/refs/heads/main/08ca8e3bfc9571c82d68673d33a1b291.mp3" loop></audio>
   </div>
 
 </div>
@@ -169,8 +169,13 @@ startScreen.addEventListener('click', () => {
 
 // Play / Pause
 playPause.addEventListener('click', () => {
-  if(audio.paused){ audio.play(); playPause.textContent='⏸'; }
-  else{ audio.pause(); playPause.textContent='▶'; }
+  if(audio.paused){ 
+    audio.play(); 
+    playPause.textContent='⏸'; 
+  } else { 
+    audio.pause(); 
+    playPause.textContent='▶'; 
+  }
 });
 
 // Skip forward/backward 5s
@@ -182,6 +187,11 @@ audio.addEventListener('timeupdate', () => {
   const percent = (audio.currentTime / audio.duration) * 100;
   progress.style.width = percent + '%';
   currentTimeEl.textContent = formatTime(audio.currentTime);
+});
+
+// Reset progress smoothly on loop
+audio.addEventListener('ended', () => {
+  progress.style.width = '0%';
 });
 
 // Set duration when metadata loads
